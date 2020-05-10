@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Findpair {
     // Given an unsorted array of integers, find a pair with given sum in it.
@@ -21,25 +23,38 @@ public class Findpair {
 //        System.out.println("Pair not found");
 
         // Solution using sorting - more efficient
-        Arrays.sort(Arr);
-         int low = 0;
-         int high = Arr.length -1;
-
-         while (low < high) {
-             if (Arr[low] + Arr[high] == sum) {
-                 System.out.println(Arr[low] + " + " + Arr[high] + " == " + sum);
-                 return;
-             }
-
-             if (Arr[low] + Arr[high] < sum) {
-                 low++;
-             } else {
-                 high--;
-             }
-         }
+//        Arrays.sort(Arr);
+//         int low = 0;
+//         int high = Arr.length -1;
+//
+//         while (low < high) {
+//             if (Arr[low] + Arr[high] == sum) {
+//                 System.out.println(Arr[low] + " + " + Arr[high] + " == " + sum);
+//                 return;
+//             }
+//
+//             if (Arr[low] + Arr[high] < sum) {
+//                 low++;
+//             } else {
+//                 high--;
+//             }
+//         }
     //  No pair with given sum exists
-        System.out.println("Pair not found");
+//        System.out.println("Pair not found");
 
+
+    // Solution using hashing - solves in linear time
+    Map<Integer, Integer> map = new HashMap<>();
+
+    for (int i = 0; i < Arr.length; i++) {
+        if (map.containsKey(sum - Arr[i])) {
+            System.out.println("Pair found at index " + map.get(sum - Arr[i]) + " and " + i);
+            return;
+        }
+
+        map.put(Arr[i], i);
+        System.out.println(map);
+    }
     }
 
     // main function
